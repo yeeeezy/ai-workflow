@@ -1,0 +1,25 @@
+# FEAT188 Gold smoke edge highlight
+
+Status: reverted at user request2026-09-27. User approved implementation on2026-09-27, then authorized committing accumulated local changes. Checkpoint bd58aa48 contains prior source/assets/layout changes; no push. Python caches excluded.
+
+Reference: C:/Users/ROG/.codex/generated_images/01a0e3f0-2760-7691-ba2b-39daaab86ca6/exec-d3e6dc76-e283-4872-8dbf-41ad9e83be28.png. Thin gold contour, retained object surface detail, restrained translucent upward wisps. Integrate with existing highlight lifecycle and verify actual UE rendering, movement/stop cleanup and multiple targets. Preserve unrelated scan environment and gun policy.
+
+Implementation investigation: existing M_Infiltrator_Highlight is a scene-color-before-bloom postprocess already assigned to maps. Stencil1 identifies opt-in objects,254 scan enemies; existing enemy overlay is independent. Evaluate procedural silhouette wisps inside the existing pass without per-object fluid simulations. Evidence/work scripts outside project: D:/UnrealWork/GoldSmokeEdge. No effect asset changes yet.
+
+## Implementation and warm verification
+Only production asset edited: M_Infiltrator_Highlight. Preserves legacy graph and output for other stencils; adds a custom procedural rim/wisp output for1/254. Eight nearby silhouette samples produce a thin rim; twelve pairs of upward-offset silhouette samples and advected two-scale noise produce restrained wisps. Exposure compensation prevents the initial overbright white result. Editable defaults: rim1.5, smoke0.45, height28pixels, speed0.65. Screen-space smoke, not world-space volumetric simulation. Actual objects/materials, native lifecycle and accepted grid/filter/BP unchanged. No C++ changes or new build needed.
+
+Actual TestMap PIE: existing BP_ScanCube summoned only at runtime, uses existing HighlightComponent StartHighlight/StopHighlight; configured Infiltrator activates/toggles scan through GAS. Eight checks pass; screenshots Before/GoldSmoke/GoldSmokeLater/Moved/Stopped show animation, movement and clearing. Temporary cube uses existing station trim material for visible surface detail; not saved to map. Existing native GoldHighlightLifecycle automation passed, including range exit/reentry/death/unpossess and weapon exclusion.
+
+12 runtime objects, same fixed camera, alternating original legacy/new shader twice,180 frame deltas per pass after4s warmup: legacy means18.899/18.785ms; new19.055/19.045ms. Combined mean delta+0.208ms. Viewport1689x577, screen percentage87, uncapped/no vsync. Whole PIE-frame timings, not isolated GPU measurements or a general FPS guarantee. No additional per-target simulation. Original t.MaxFPS/r.VSync values restored.
+
+Resolved probe errors: Python GameplayStatics deferred spawn is not exposed; replaced with PIE Summon of existing BP. A save requested in the same tick as EndPlay was rejected; subsequent save after PIE fully ended succeeded. No shader compile errors. Before cold restart: dirty map/content packages0. Cold verification pending.
+
+## Completion
+Cold restart verifies exact saved HLSL, one connected smoke Custom node and all four parameter defaults. Optional material-statistics introspection was unavailable; removed from the evidence writer and completed the assertions successfully. No shader errors. Fresh actual TestMap GAS/HighlightComponent review passes10 checks, with a moving static target and a skeletal Phantom simultaneously showing gold highlights/wisps. Final GoldSmoke.png/GoldSmokeLater.png are actual cold-run captures. Fixed a review-only screenshot timing issue: previously highlight was re-enabled before the queued off screenshot rendered; final Stopped.png waits a frame and proves both scan and object highlight stay off. Native GoldHighlightLifecycle Success remains applicable; production code was unchanged throughout.
+
+Final production diff is one material plus harness documentation. Original environment/grid/filter, enemy overlay, Blueprint/native source and maps unchanged from bd58aa48. New FEAT188 results saved but not committed; no push, package or version change. Visual implementation is complete with actual preview for user review, not a claim that a procedural screen-space effect reproduces the generated concept image pixel-for-pixel.
+
+
+## User rejection and exact rollback
+2026-09-27 user rejected visual result and requested reverting. Created scoped safety checkpoint cfd02e0c, then restored the sole production material M_Infiltrator_Highlight from pre-feature bd58aa48. SHA256 exactly matches that commit LFS object (e8f5974722905e3a56b171d1e6c3841947352a8de07e25ee675b600d1fc277dd). All FEAT188 smoke/rim shader changes are removed. Original enemy overlay and other assets unchanged. Target editor was already closed; unrelated TMIIR editor left untouched. No fresh PIE run; exact known prior bytes restored. Evidence D:/UnrealWork/GoldSmokeEdge/reverted.json. User wording about original gold color is ambiguous; asked whether they do not want gold or mean it does not look gold. Await clarification before color changes. Rollback uncommitted, no push/package/version change.

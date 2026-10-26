@@ -1,0 +1,13 @@
+# FEAT-142 Scorpion recording map
+Status: done. Closed: 2026-09-21. User 2026-09-21 explicitly requested a new empty map, fixed elevated full view, and no player character. This supersedes the previous TestMap-only/temporary-camera restriction for this recording map only.
+
+Map-owned AScorpionRecordingGameMode spawns existing boss in Scorpion form, non-rendered TargetPoint, fixed CameraActor. No default Pawn/HUD. Existing production BT/movement/tail GA runs; target cycles after two strikes to demonstrate locomotion and attacks continuously. No changes to production boss assets or behavior. Build and map authoring/validation pending. External evidence D:/UnrealWork/ScorpionRecording. WIP218cf85 protects prior harness state; unrelated existing assets/deletions preserved.
+
+Prior temporary TestMap attempt stopped before completion because Python LastThreat is read-only. No map/asset saves occurred; it is replaced by the explicit recording map request.
+
+## Completed and verified
+Saved `/Game/Maps/ScorpionRecording/ScorpionRecording` contains only Ground/Sun/Sky/Ambient (4 actors), native ScorpionRecordingGameMode override. Runtime creates exactly one Character (the Scorpion), no player pawn, no weapon/HUD or Boss health widget. Fixed camera at (0,-12500,14500), pitch -47.932893/yaw90, FOV62. Native game mode disables BossHealthBarWidgetClass only on this spawned instance. Recording target cycles after two attacks; normal production AI/movement/GA owns locomotion and attack execution.
+
+Development Editor Win64 final-build.log Succeeded, actual compile/link; version unchanged v0.18. Fresh editor reload cold.json verifies saved map/mode and four actors; existing Boss BP compiled. Final actual PIE validation.json: no player, camera numeric position/rotation constant throughout, movement3921.93cm,4 completed strikes and target cycle. final-ready.json: no player, no boss HUD, zero dirty maps. RecordingReady00000.png actual1920x1080 render inspected, whole Scorpion and attack area framed with no other characters. Existing Lobby/SpaceStation/TestMap and Boss Blueprint/UI hashes unchanged (preservation.json). No package/final commit/push.
+
+Editor PID6548 remains in running PIE for user's video recording, immersive viewport at primary monitor window(30,30)-(1950,1110); only primary connected. Camera remains fixed; demo loops without Python. Stop and Play restarts. Reopen map by Content/Maps/ScorpionRecording/ScorpionRecording and Play. External mailbox startup/requests in D:/UnrealWork/ScorpionRecording; validation callback finished. No background build/test loop. Version policy correction documented separately in FEAT137.

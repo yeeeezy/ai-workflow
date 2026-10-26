@@ -1,0 +1,19 @@
+# FEAT255 Void stationary QTE and whip slam
+
+Status: done; closed2026-10-07. User approved2026-10-07: stationary4s escape countdown, then sudden curved airborne whip, slowing apex turn and accelerated slam. Lock view after timeout; change pitch/roll with motion, extend strands to actual player. Supersedes FEAT254 immediate slow lift. Keep health-only invincibility, existing damage/audio, lifecycle and collision protection. No map saves or retargeting.
+
+Implementation/validation pending. Evidence D:/UnrealWork/VoidGrabWhip.
+
+Checkpoint2fcd26a4. Added Whip enum after existing values. EscapeDuration4 owns stationary Hook; only Hook accepts eye escape. Whip launches250cm over.55s with45cm outward/90cm curved side motion, slows at apex, .12s pitch/roll reversal, then existing.25s accelerating descent. Full capsule subdivided curve sweeps and downward floor revalidation retained. Look block counted only after timeout, balanced on release/cancel; controller pitch/yaw drive arms, owned modifier supplies roll; endpoints use same whip orientation. QTE hidden after timeout, red overlay retained. Existing regression expanded for full stationary window, toss/lock/late eye/cancel/external lock ownership. Build and live validation pending.
+
+Build24.72s succeeded, BP opened/compiled/saved. Initial regression completed with only stationary-window assertion failures: baseline incorrectly sampled at teleport before windup/falling-to-floor. Fixed test to sample actual capture position on first Hook frame; no production movement workaround. Other escape/collision/lock/damage/lifecycle assertions passed. Rerun pending.
+
+Actual preview1259frames: ground/wall Hook drift0.0cm throughout~4s, aim free; Whip/Slam look locked,250cm rise and100HP InvincibleON. Camera pitch spans55 to below-60deg, signed roll roughly-24..16deg (opposite sign on opposite toss). Ten held/up/turn/down/impact screenshots captured, ground up/down visually inspected. Transient fixtures only. Evidence live.json.
+
+Visual follow-up: rapid apex reversal exposed camera/arms sampling lag. Engine LevelTick runs camera managers between PostPhysics and PostUpdateWork. Moved owned component tick from PostUpdateWork to PostPhysics (retains mesh/player movement prerequisites) so displacement/rotation/strand targets are ready before camera sampling. Rebuild and visual rerun required.
+
+User visually accepted baseline then requested more height and airborne shake. Baseline final regression editor-final.log Success, latest1257frame preview drift0,250cm rise, strand lengths change ground583..718cm/wall625..690cm, camera/arms aligned after PostPhysics change. New adjustment:450cm height, bounded1.5deg multi-axis shake on launch (1.4x during slam), fades for apex and contact; view-only no accumulated aim drift or translational clipping. Strand anchors use the same shaken rotation. Follow-up verification pending.
+
+Latest user correction removes added airborne shake only, retains450cm and authored whip turn/impact feedback. BP WhipCameraShake set0, opened/compiled/saved. Existing preview references were invalid after compile; ended PIE and rebuilding transient preview. No C++ change required for parameter opt-out. Higher build20.94s and final TentacleGrab regression Success already passed.
+
+Final user decision: keep current version, stop tuning. Final Higher regression Success,1207frame ground/wall actual height449.98cm, saved BP no added shake and fresh runtime both height450/shake0. final-state.json PIEtrue Invincibletrue dirtycontent/maps0. Checkpointf9a555c2 before shake disable; latest results saved/uncommitted, no push/package/map/retarget changes. Existing landing camera kick remains; only requested added airborne shake disabled. Next task is read-only cursor asset references, no cursor replacement authorized until user chooses.

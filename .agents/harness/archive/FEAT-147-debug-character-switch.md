@@ -1,0 +1,5 @@
+# FEAT-147 Dev panel character buttons
+
+User requested three character buttons. Reuse controller SwitchCharacter; close panel before switching. Editable WBP layout, English labels. Checkpoint a90679c protects prior overlapping docs; unrelated source/assets preserved. Implementation underway.
+
+Completed: added Maintenance Worker, Infiltrator, The Executive buttons to editable WBP_DebugMenu. BindWidgetOptional handlers close debug then invoke existing controller SwitchCharacter; current location retained, normal character default equipment. Existing God Mode/speed/version intact. Editor author helper registers widget variable GUIDs (initial missing-GUID ensures corrected); Development Editor rebuild and final widget editor compile/save passed with clean final log. Five physical PIE clicks passed, including repeated Executive and return to Infiltrator. God Mode physical OFF/ON/OFF regression passed. No dirty content/maps. Evidence D:/UnrealWork/DebugCharacterSwitch. Editor remains PIE Infiltrator with panel open on detected secondary screen. Final changes uncommitted; no push/package/version change.

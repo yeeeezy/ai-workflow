@@ -1,0 +1,20 @@
+# FEAT-143 Lobby scene cleanup
+Status: done
+Closed: 2026-09-22
+
+User explicitly authorized the preceding cleanup plan and added lobby background audio, unnecessary collisions and imported unused interaction logic. On 2026-09-22 user requested shutting down after completion. Existing FEAT-141 deferred checks preserved separately. Checkpoint 55327e1 protects overlapping documentation; LobbyMap was clean and external backup/hash will preserve original map. No final Git commit/push or packaging authorized.
+
+Initial audit: 1985 actors; 1730 StaticMeshActors, 29 BP_Fan, 8 BP_Gravity_Reactor_Rotator, 13 AmbientSound actors. Two real lobby cameras (far CineCameraActor_6, near CineCameraActor_2) plus two unused scene cameras. Lobby imported BP_Door_NoAnimation has preexisting invalid overlap-event compile warnings. Full actor inventory and before images: D:/UnrealWork/LobbyCleanup.
+
+## Cleanup implementation
+Saved LobbyMap now 787 actors (1985 before): 1207 removed, nine static door pieces created to preserve the remaining obsolete door appearance. Removed 1074 StaticMeshActors, unused imported scene BPs including all door timelines/astronaut displays, 13 AmbientSound actors, two unused cameras, five already-disabled lights, and 21 empty editor groups. Camera cone union expanded 35%, bounds expanded 200cm, minimum distance 1800cm; all external-body shell geometry explicitly preserved for occlusion/shadow contribution. Seven visible/candidate fans and two reactor rotators retained; their map-owned Blueprints have AudioComponents removed and compiled/saved. Only consumers of those two BPs are LobbyMap. All retained scenery actors have collision disabled and their primitives have collision/overlap disabled. No gameplay UI/controller/character code changes.
+
+Actual PIE first pass: 709 scenery actors, zero audio components, zero scenery actor collision, zero overlap components, zero scenery actor ticks, zero TimelineComponents, nine RotatingMovementComponents. Far/near actual game viewport screenshots before/after visually inspected; retained actor locations unchanged. Saved map and reloaded through LevelEditorSubsystem. UI/travel and cold verification ongoing.
+
+## Completion and verification
+- Saved-map reload and 20 actual PIE UI delegate/state checks pass: settings/back, all three characters, all six weapons, near/far/back and wrap-around selection (ui-validation.json).
+- Actual UI START GAME travels to SpaceStation with BP_MaintenanceWorker and game cursor hidden; GameInstance ReturnToMainMenu reloads Lobby with menu/cursor restored and zero audio (travel-validation.json).
+- Fresh editor process PID18488 loads saved LobbyMap, recompiles two changed BPs with zero Blueprint warnings/errors, starts real render-enabled PIE, verifies 787 editor actors /709 scenery actors, no audio/collision/overlaps/scenery actor ticks/timelines, nine rotating visual components and measured rotation change, correct lobby camera/character/menu (cold-validation.json). It exits cleanly. Other engine installation/telemetry warnings remain; no claim that the whole engine log is warning-free.
+- Map package 8,697,114 ->3,384,287 bytes (61.1% smaller). Actor count decreases60.4%. These are resource/scene reductions, not measured FPS gain.
+- Only three production packages changed: LobbyMap.umap, BP_Fan.uasset, BP_Gravity_Reactor_Rotator.uasset. Original source asset files remain; unreferenced scenery/audio is not requested by the Lobby loading graph. No C++/config/other map changes, no package/version increment, no final commit/push. SHA256 manifest confirms cold verification did not modify saved packages.
+- Editor closed after dirty package lists were empty; cold editor also exited. User requested direct PC shutdown after completion; OS shutdown is the final action. Original backups, full before/after actor manifests, screenshots, scripts, checks and logs are in D:/UnrealWork/LobbyCleanup. Existing FEAT141 remaining tests and FEAT140 collision/VFX tasks remain deferred; active index restored to FEAT141.

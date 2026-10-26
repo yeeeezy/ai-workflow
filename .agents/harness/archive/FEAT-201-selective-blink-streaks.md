@@ -1,0 +1,9 @@
+# FEAT-201 Selective blink streaks
+
+Status: done; closed2026-09-27
+
+User approved local contrast/directional purple streak distribution after brightness restored. Preserve global brightness; no return to FEAT199 dark grade. Separate short base blur and long highlight response, protect centre, use bounded luminance-neutral chroma instead of additive purple wash. Material-only scope;600cm/.26s/.28tail and scan untouched. Evidence D:/UnrealWork/BlinkStreaks.
+
+## Completion
+
+FEAT201 completed2026-09-27: user approved local contrast/selective purple streak redistribution while preserving FEAT200 scene brightness. Blink M/MI now separate8tap short base blur and32tap long radial highlights with centre protection (radius.38->1.05), plus4neighbour bounded local contrast. Long-sample weighted luminance variance and peak threshold select peripheral highlight trails; zero-luminance chroma direction with RGB headroom bounds replaces additive purple wash. First16tap adjacent-difference prototype showed repeated purple stripes; revised32tap variance mask removes those visible repetitions. New editable StreakLength.5, StreakStrength.85, LocalContrast.45. Brightness1/Contrast1/Vignette0 retained; blur.24/saturation.08/highlight threshold.65 and original hue retained. Actual final BlinkMid.png shows clear centre, localized peripheral violet trails and neutral broad sky/walls. Live final shader compile/save succeeds, actual TestMap18 real GAS checks pass incl600cm, tail cleanup, scan coexistence and pause/resume; cold27parameter/shader/reference checks pass. Exactly2existing material packages changed;52other ability/BP packages SHA256 unchanged. No native/BP/map changes or build required. PIE ended, dirtycontent/maps0.44shader-loop samples versus prior16; no measured performance claim. Checkpoint f74efa95; evidence D:/UnrealWork/BlinkStreaks. Final saved/uncommitted; subjective reference acceptance pending. No push/package/version change.

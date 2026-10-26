@@ -1,0 +1,7 @@
+# FEAT220 Sight scale repair
+
+Status: done (closed2026-09-29)
+User requests restoration after accidental gun distortion while adjusting ADS. Cold audit finds silver BP AimSightLocalTransform ScaleX1.939409 vs known good1; Y-20,zoom1.5,sensitivity.5 are intentional tuning retained. Other transforms and black rifle remain normal. Known prior FEAT219 source/docs/black rifle checkpoint9aee5bbe; suspect user-edited silver BP excluded from commit, externally backed up to D:/UnrealWork/InfiltratorAimRepair/BP_InfiltratorLaserRifle-before.uasset before repair. Only aim transform scale will change. No source changes/rebuild needed. Evidence D:/UnrealWork/InfiltratorAimRepair.
+
+## Verification
+Restored ONLY silver BP AimSightLocalTransform scale from(1.939409,1,1) to(1,1,1), retaining userY-20,zoom1.5,sensitivity.5 and all other transforms. Blueprint opened/compiled/saved in UE. Actual TestMap11checks pass including Enhanced Input ADS, unit viewmodel/gun world scale, retained tuning and release restoration. RepairedAim00000.png visually inspected. No C++ changes/rebuild required. Final editor36988 on detected secondary,SpaceStation,noPIE/dirtycontent/maps. Black rifle untouched. Prior known FEAT219 source/docs/black BP checkpoint9aee5bbe; user silver pre-repair asset externally backed up, excluded from checkpoint. Evidence D:/UnrealWork/InfiltratorAimRepair. No maps,mesh,animation,package,version,push changes. Silver final saved/uncommitted.

@@ -1,0 +1,14 @@
+{
+  "Source\\TheManTest\\Public\\Characters\\_Shared\\Animation\\BaseLocomotionAnimInstance.h": "Source\\TheManTest\\Public\\Characters\\_Shared\\Animations\\BaseLocomotionAnimInstance.h",
+  "Source\\TheManTest\\Public\\Characters\\CharacterBase\\Animation\\CharacterBaseAnimInstance.h": "Source\\TheManTest\\Public\\Characters\\CharacterBase\\Animations\\CharacterBaseAnimInstance.h",
+  "Source\\TheManTest\\Public\\Characters\\CharacterBase\\FPSCharacterBase\\FPSCharacterBase.h": "Source\\TheManTest\\Public\\Characters\\CharacterBase\\FPSCharacterBase.h",
+  "Source\\TheManTest\\Public\\Characters\\CharacterBase\\FPSCharacterBase\\Animation\\FPSCharacterAnimInstance.h": "Source\\TheManTest\\Public\\Characters\\CharacterBase\\Animations\\FPSCharacterAnimInstance.h",
+  "Source\\TheManTest\\Public\\Weapons\\_Shared\\Animation\\EquipmentAnimInstance.h": "Source\\TheManTest\\Public\\Weapons\\_Shared\\Animations\\EquipmentAnimInstance.h",
+  "Source\\TheManTest\\Public\\Weapons\\_Shared\\Firearms\\FirearmAnimInstance.h": "Source\\TheManTest\\Public\\Weapons\\_Shared\\Animations\\FirearmAnimInstance.h",
+  "Source\\TheManTest\\Private\\Characters\\_Shared\\Animation\\BaseLocomotionAnimInstance.cpp": "Source\\TheManTest\\Private\\Characters\\_Shared\\Animations\\BaseLocomotionAnimInstance.cpp",
+  "Source\\TheManTest\\Private\\Characters\\CharacterBase\\Animation\\CharacterBaseAnimInstance.cpp": "Source\\TheManTest\\Private\\Characters\\CharacterBase\\Animations\\CharacterBaseAnimInstance.cpp",
+  "Source\\TheManTest\\Private\\Characters\\CharacterBase\\FPSCharacterBase\\FPSCharacterBase.cpp": "Source\\TheManTest\\Private\\Characters\\CharacterBase\\FPSCharacterBase.cpp",
+  "Source\\TheManTest\\Private\\Characters\\CharacterBase\\FPSCharacterBase\\Animation\\FPSCharacterAnimInstance.cpp": "Source\\TheManTest\\Private\\Characters\\CharacterBase\\Animations\\FPSCharacterAnimInstance.cpp",
+  "Source\\TheManTest\\Private\\Weapons\\_Shared\\Animation\\EquipmentAnimInstance.cpp": "Source\\TheManTest\\Private\\Weapons\\_Shared\\Animations\\EquipmentAnimInstance.cpp",
+  "Source\\TheManTest\\Private\\Weapons\\_Shared\\Firearms\\FirearmAnimInstance.cpp": "Source\\TheManTest\\Private\\Weapons\\_Shared\\Animations\\FirearmAnimInstance.cpp"
+}

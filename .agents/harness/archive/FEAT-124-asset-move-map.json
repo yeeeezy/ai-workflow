@@ -1,0 +1,16 @@
+{
+  "/Game/Characters/Infiltrator/Materials/MPC_Infiltrator_ScanEffect": "/Game/Characters/Infiltrator/Effects/Scan/Materials/MPC_Infiltrator_ScanEffect",
+  "/Game/Characters/CharacterBase/GAS/Abilities/BGA_Shoot": "/Game/Weapons/_Shared/GAS/Abilities/BGA_Shoot",
+  "/Game/Characters/Infiltrator/Materials/M_Infiltrator_Highlight": "/Game/Characters/Infiltrator/Effects/Scan/Materials/M_Infiltrator_Highlight",
+  "/Game/Characters/Infiltrator/Materials/M_Infiltrator_ScanContours": "/Game/Characters/Infiltrator/Effects/Scan/Materials/M_Infiltrator_ScanContours",
+  "/Game/Characters/Infiltrator/Materials/MI_Infiltrator_Highlight": "/Game/Characters/Infiltrator/Effects/Scan/Materials/MI_Infiltrator_Highlight",
+  "/Game/Characters/MaintenanceWorker/FirstPerson/Materials/Layers/T_MaintenanceWorker_ML_Aluminum01": "/Game/Characters/MaintenanceWorker/FirstPerson/Textures/Layers/T_MaintenanceWorker_ML_Aluminum01",
+  "/Game/Characters/MaintenanceWorker/FirstPerson/Materials/Layers/T_MaintenanceWorker_ML_Aluminum01_Normal": "/Game/Characters/MaintenanceWorker/FirstPerson/Textures/Layers/T_MaintenanceWorker_ML_Aluminum01_Normal",
+  "/Game/Characters/MaintenanceWorker/FirstPerson/Materials/Layers/T_MaintenanceWorker_ML_Rubber_Blue_01_BaseColor": "/Game/Characters/MaintenanceWorker/FirstPerson/Textures/Layers/T_MaintenanceWorker_ML_Rubber_Blue_01_BaseColor",
+  "/Game/Characters/MaintenanceWorker/FirstPerson/Materials/Layers/T_MaintenanceWorker_ML_Rubber_Blue_01_Normal": "/Game/Characters/MaintenanceWorker/FirstPerson/Textures/Layers/T_MaintenanceWorker_ML_Rubber_Blue_01_Normal",
+  "/Game/Weapons/ElectricGun/Effects/Textures/CLC_ElectricGun_Gradient_Ramp_Basic_Alpha_0-1": "/Game/Weapons/ElectricGun/Effects/Curves/CLC_ElectricGun_Gradient_Ramp_Basic_Alpha_0-1",
+  "/Game/Weapons/ElectricGun/Effects/Textures/CLC_ElectricGun_Gradient_Ramp_Fire_Orange_01": "/Game/Weapons/ElectricGun/Effects/Curves/CLC_ElectricGun_Gradient_Ramp_Fire_Orange_01",
+  "/Game/Weapons/ElectricGun/Effects/Textures/CLC_ElectricGun_Gradient_Ramp_Smoke_01": "/Game/Weapons/ElectricGun/Effects/Curves/CLC_ElectricGun_Gradient_Ramp_Smoke_01",
+  "/Game/Weapons/ElectricGun/Effects/Textures/CLA_ElectricGun_Gradient_Atlas": "/Game/Weapons/ElectricGun/Effects/Curves/CLA_ElectricGun_Gradient_Atlas",
+  "/Game/Weapons/ExplosionGun/Effects/Textures/CLA_ExplosionGun_Physical1_Gradient_Atlas": "/Game/Weapons/ExplosionGun/Effects/Curves/CLA_ExplosionGun_Physical1_Gradient_Atlas"
+}

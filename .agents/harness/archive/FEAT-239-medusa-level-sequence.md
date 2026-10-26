@@ -1,0 +1,16 @@
+# FEAT239 Editable Medusa introduction
+
+Status: done.2026-10-01. User reports blurred image/changed aspect and requests an editable low-angle Level Sequence to refine by hand. User selected TestMap preview. Sequence owned by Medusa; existing map geometry/gameplay preserved. Old procedural intro disabled while replacement is being authored; runtime handoff after user finishes shot editing, not wired to the draft automatically.
+
+Checkpoint7cb1be5f preserves FEAT238. External scripts/evidence D:/UnrealWork/MedusaSequence. Two editors currently open for the same project (31416 controlled,21232 user-opened); avoid saving maps or unrelated assets. Spawnable preview camera/mesh inside sequence avoids permanent test actors. ACameraActor default bConstrainAspectRatio=true and aspect1.777778 confirmed in engine source and loaded CDO; explains forced16:9. Blur cause not independently proven. New cine camera explicitly disables focus/DOF and overrides motion blur to0.
+
+
+## Delivered
+
+/Game/Enemy/Nightmare/Medusa/Sequences/LS_Medusa_Intro,6s/30fps/frames0..180. Spawnable native SkeletalMeshActor (no AI) and CineCameraActor. TestMap preview origin(-1860.326,-662.952,0); camera(-1210.326,-882.952,60),pitch7.061/yaw161.301. Both editable Transform tracks have endpoint keys. Original AS_Medusa_Intro animation atframes12..162. Camera Cuts0..180, Fade keys0:1/12:0/150:0/174:1/179:1. Fullframe36x20.25mm,28mm focal length,f8,DOF disabled,motionblur0,aspect unconstrained/YFOV preserved. Camera component lens tracks remain editable. Auto-created duplicate transform/empty animation tracks removed from this new asset only.
+
+BP_Medusa.bPlayIntroduction=false disables superseded procedural intro while user hand-edits this draft. ActivationRadius800/GAS/Dark Veil unchanged. No runtime connection to draft sequence added; user was told this explicitly. Preview actors are sequence spawnables; no map or persistent level actors saved. Open TestMap then this asset and enable Camera Cuts viewport lock to preview; edit Camera Transform/lens/animation/fade keys directly.
+
+Verification: BP opened/compiled/saved, sequence saved and package reloaded, exact track/template/animation references validated with no Paragon dependencies. Editor playback109samples frame35->94, paused at75 for handoff. MedusaSequencePreview2.png visually inspected: full actor framed, low viewpoint, no aspect bars. Actual PIE inside700cm confirms old intro disabled,normal player view/unpaused,800radius. No C++ edits/rebuild required. Final TestMap noPIE/dirty content/maps; sequence open in editor31416, Sequencer window on detected primary at(120,870)-(2321,1440), no focus-stealing. User-opened second editor21232 not modified. Evidence/scripts D:/UnrealWork/MedusaSequence; screenshots Saved/Screenshots/MedusaSequencePreview*.png. Existing unrelated user edits preserved. Final result uncommitted after7cb1be5f,no package/version/push.
+
+Authoring notes: UE5.7 editor subsystem requires sequence open before adding spawnables; template components accessed by reflected member property, not actor registered-component lookup. MCP external file argument rejected by project-relative path validator; authoring executed through existing authorized local Python bridge. Bridge now watches D:/UnrealWork/MedusaSequence/command.py in this editor because its shared R variable was updated.

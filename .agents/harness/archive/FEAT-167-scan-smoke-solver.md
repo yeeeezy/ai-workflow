@@ -1,0 +1,5 @@
+# FEAT-167 Scan smoke pressure solver optimisation
+
+In progress2026-09-26. User explicitly approved testing16/8/4 pressure iterations in SpaceStation. Select quality/performance balance from measurements, preserve current palette/resolution/update frequency and all cleanup. No distance LOD or renderer rewrite in this first batch. Prior FEAT166 state checkpointed before edits. Evidence D:/UnrealWork/SmokeSolver.
+
+User paused optimisation to ask about manual scan colours. Checkpoint47c9b30 protects FEAT166. One CPP now has bounded tm.ScanSmoke.PressureIterations (candidate default8,1-32 clamp,correct odd ping-pong destination). NOT compiled/validated or accepted yet. First build blocked by engine Live Coding while source TMIIR editor44432 is open; no TheManTest editor was running. No editor closed or live coding bypass attempted. Existing binary remains previous16-iteration implementation. No benchmark launched. Resume by resolving build safely, then controlled16/8/4 SpaceStation comparisons before selecting final default.

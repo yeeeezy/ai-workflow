@@ -1,0 +1,9 @@
+# FEAT-103 Lobby weapon camera edge clarity
+
+Status: done. Closed 2026-09-17. User approved investigating and correcting fuzzy character edges. Primary monitor allowed this session. Checkpoint 51319e7 preserves completed pause backdrop correction.
+
+Live PIE comparison: DOF off removes grey shoulder halo; native 100% render + TSR history 200% retains it. Original near aperture F/2.8, focus ~274cm, 42mm. F/5.6 and F/8 reduce fringe. Comparing F/4 before choosing final map tuning. Temporary CVars restored after each run; aperture changes so far only in transient PIE world. Initial script failed at unavailable Python set_current_aperture; corrected with current_aperture editor property and rerun succeeded. Evidence D:/UnrealWork/LobbyEdges.
+
+Authoring: only LobbyMap near camera CineCameraActor_2 current_aperture changed 2.8 -> 5.6. F/4 retained noticeable fringe; F/5.6 chosen for cleaner shoulders. Far camera remains F/2.8. author.json verifies every camera transform/focal length and other aperture unchanged. Map saved and reloaded; persisted 5.6 confirmed. Background defocus is reduced; dynamic subject focus remains enabled. No C++ or Blueprint edits, compilation not applicable. Final seven-view PIE check running.
+
+Final: fixed.json ok=true; seven live PIE samples cover Worker character/Repair/Electric/Explosion and Executive character/weapon/return. Near F/5.6 and far F/2.8 asserted after transitions; maximum focus depth error 1.0127372092938458e-05 cm. Rendered Worker weapon and Executive character/weapon inspected. Background defocus weaker by design. Original global CVars restored, PIE stopped, editor remains open. No source/Blueprint changes requiring compilation. Existing packaged build not rebuilt or newly certified; earlier FEAT-101 startup issue remains pending. Final map/doc edits uncommitted/unpushed.

@@ -1,0 +1,16 @@
+# FEAT-124 Character and weapon directory ownership cleanup
+
+Status: done
+Closed: 2026-09-17
+
+User authorized organizing corresponding folders and validating file placement after FEAT123 naming. Scope: Characters/Weapons assets and matching native sources. Four worker textures under Materials move to Textures/Layers, five gun color curves/atlases under Textures move to Curves, shared BGA_Shoot moves from CharacterBase to Weapons/_Shared/GAS/Abilities, four Infiltrator scan materials consolidate under Effects/Scan/Materials. Native Animation folders become Animations, duplicate FPSCharacterBase nesting is removed, and FirearmAnimInstance joins shared weapon Animations. AssetTools updates consumers; no gameplay tuning, map layout or retargeting changes. Evidence: D:/UnrealWork/DirectoryCleanup.
+
+Checkpoint e006779 preserves FEAT123 before this change; worker user configuration backed up separately. AssetTools moved14 packages and saved/compiled consumers. Twelve native header/source files moved,38 text files updated including includes, scripts and current architecture. build.log Development Editor Win64 Succeeded. Old native include scan empty. Empty directories removed only within six explicitly checked Characters/Weapons Content/Public/Private roots. SpaceStation resaved by UE to update scan references; no actor-layout edits authored. Cold audit first detected an old MPC package left by redirector deletion; a second zero-reference cleanup is required before acceptance.
+
+Cleanup resolution: EditorAssetLibrary deletion reported success but the unreferenced old MPC file remained/restored on disk, including after disabling SCC for the cleanup process. After verifying its replacement and zero referencers, the precise obsolete file was backed up externally and removed with a checked absolute path while UE was closed. Final disk scan confirms all14 old files absent. No raw filesystem asset move/rename was used.
+
+Cold validation additionally found two material references in TestMap's external PostProcessVolume package `__ExternalActors__/Maps/Test/TestMap/5/JT/4ROSX2JFO1X2RP1CR2Z7DZ`. Saved that exact package through Unreal with temporary package redirects so its existing values loaded intact; removed temporary redirects before final cold validation. No postprocess settings, actor transforms or map layout were authored. Evidence external.json confirms package save success. Directory removal count12; worker Blueprint SHA256 matches this task's before-backup exactly.
+
+Final verification: cold.json passed,830 assets/58 compiled Blueprints, zero type-folder mismatches, zero old paths/referencers/asset redirectors. BGA_Shoot has six concrete gun consumers, confirming shared weapon ownership. Eight regressions passed: AssetVariationPolicy, Phantom.AnimationOverrides, Phantom.ReusableCombatModules, BlinkKeyboard, ExecutiveEquipped, ThreeWeaponBaseline, ThreeWeaponPIESwitch and isolated LaserRifleAim. build.log Succeeded; git diff --check passed. All editor processes exited. Two pre-existing reference-material warnings from FEAT123 remain outside scope.
+
+Final changes uncommitted; no executable repackaged. Asset and source move maps are FEAT-124-asset-move-map.json / FEAT-124-source-move-map.json. Active feature restored to120;120/113 acceptance is separate and remains pending.

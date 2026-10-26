@@ -1,0 +1,43 @@
+# [FEAT-050] UE 5.7 Unreal MCP Isolated Integration
+
+**Created:** 2026-07-26  
+**Status:** done  
+**Branch:** `test/unreal-mcp-5.7`
+
+## Scope
+
+Evaluate a third-party Unreal MCP without changing the stable UE 5.7.4 baseline on `main`. The integration is local-only and defaults to read-only inspection; all project mutations still require a concrete plan and explicit user confirmation.
+
+## Implementation
+
+- Pinned `ChiR24/Unreal_mcp` at tag `v0.5.30` under `D:\Unreal Plugins\Unreal_mcp-v0.5.30`.
+- Added that repository's `plugins` directory through `AdditionalPluginDirectories`.
+- Enabled `McpAutomationBridge` only on the isolated test branch.
+- Disabled the legacy WebSocket listener and enabled Native MCP at `http://127.0.0.1:3000/mcp`.
+- Kept non-loopback access disabled and embedded the project's confirmation-before-mutation rule in the server instructions.
+- Registered the endpoint in the Codex user configuration as `unreal-engine`.
+
+## Verification
+
+- UE 5.7.4 Development Editor / Win64 build: succeeded, 25/25 actions.
+- Editor log: module/subsystem initialized and 23 self-describing tools registered.
+- MCP `initialize`: HTTP 200, protocol version `2025-03-26`, server `unreal-mcp`.
+- MCP `tools/list`: HTTP 200, 23 tools returned.
+- No asset-mutating MCP tool was invoked.
+
+## Known Notes
+
+- The plugin logs that `Resources/MCP/server-info.json` is absent and uses built-in defaults. Handshake and tool discovery still succeed; this is non-blocking for v0.5.30.
+- `StructUtils` produces a UE 5.7 deprecation warning in plugin metadata, but compilation succeeds.
+- A new Codex session is required before the newly registered MCP appears as a native tool in the session.
+- The obsolete and corrupted `.agents/harness/init.ps1` startup check was removed after user approval; harness state is read directly from `AGENTS.md`, `feature_list.json`, `progress.md`, and the active feature archive.
+- Do not merge the test branch into `main` until the user explicitly approves retaining the plugin.
+
+## 2026-07-26-session82 - Rider C4702 compatibility patch
+
+- Rider-triggered UBT compilation treated MSVC C4702 as an error in `McpAutomationBridge_LevelHandlers.cpp`.
+- Root cause: the UE 5.7-safe `create_new_level` route returned through `HandleManageLevelStructureAction`, while the retired legacy implementation remained lexically after that unconditional return.
+- Created local external-plugin branch `fix/ue57-c4702` from tag `v0.5.30`.
+- Commit `c9bee30` excludes the retired block from compilation; no runtime path was changed because that block was already unreachable.
+- Verification: `TheManTestEditor Win64 Development -WarningsAsErrors` completed 40/40 actions successfully.
+- The patch exists only in `D:\Unreal Plugins\Unreal_mcp-v0.5.30`; it has not been pushed upstream.

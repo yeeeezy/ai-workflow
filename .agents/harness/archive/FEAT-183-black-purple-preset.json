@@ -1,0 +1,123 @@
+{
+  "before": {
+    "Base-Color RGBA": [
+      0.11999999731779099,
+      0.04500000178813934,
+      0.23999999463558197,
+      1.0
+    ],
+    "Background-Color RGB": [
+      0.0020000000949949026,
+      0.0010000000474974513,
+      0.006000000052154064,
+      0.5
+    ],
+    "Flash-Color RGBA": [
+      0.41999998688697815,
+      0.23000000417232513,
+      0.699999988079071,
+      0.10000000149011612
+    ],
+    "Outline-Color RGBA": [
+      0.4000000059604645,
+      0.2199999988079071,
+      0.6800000071525574,
+      0.20000000298023224
+    ],
+    "Outline-ColorBoost RGBA": [
+      0.6200000047683716,
+      0.3799999952316284,
+      1.0,
+      6.0
+    ],
+    "Fresnel-Color RGBA": [
+      0.07999999821186066,
+      0.02500000037252903,
+      0.17000000178813934,
+      0.20000000298023224
+    ],
+    "Fresnel-Color Boost RGBA": [
+      0.6200000047683716,
+      0.3799999952316284,
+      1.0,
+      6.0
+    ]
+  },
+  "colors": {
+    "Base-Color RGBA": [
+      0.025,
+      0.01,
+      0.05,
+      1
+    ],
+    "Background-Color RGB": [
+      0.001,
+      0.0005,
+      0.002,
+      0.5
+    ],
+    "Flash-Color RGBA": [
+      0.25,
+      0.13,
+      0.45,
+      0.08
+    ],
+    "Outline-Color RGBA": [
+      0.1,
+      0.055,
+      0.18,
+      0.12
+    ],
+    "Outline-ColorBoost RGBA": [
+      0.4,
+      0.23,
+      0.7,
+      2
+    ],
+    "Fresnel-Color RGBA": [
+      0.025,
+      0.009,
+      0.06,
+      0.12
+    ],
+    "Fresnel-Color Boost RGBA": [
+      0.4,
+      0.23,
+      0.7,
+      2
+    ]
+  },
+  "scalars": {
+    "Base-Desaturation": 1.0
+  },
+  "preserved": {
+    "Dots-Color RGBA": [
+      1.0,
+      0.75,
+      0.0,
+      0.20000000298023224
+    ],
+    "Dots-Color Boost RGBA": [
+      0.0,
+      0.5,
+      1.0,
+      20.0
+    ],
+    "Grid RGBA": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Character Outline-Color RGBA": [
+      0.18229199945926666,
+      0.18229199945926666,
+      0.18229199945926666,
+      0.0
+    ]
+  },
+  "saved": true,
+  "checkpoint": "5963da2",
+  "reference": "Screenshots/2026-09-27 095714",
+  "restore": "Apply colors and scalars to BOTH parent defaults and MI; preserved parameters remain unchanged. Niagara gold remains existing BP/native values."
+}

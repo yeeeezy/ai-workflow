@@ -1,0 +1,9 @@
+# Scan video reference audit — 2026-09-17
+
+User asked to inspect D:/ROG/Videos/EV录屏/TMII/20260609_084711.mp4 and propose corrections. Read-only code/asset inspection; no gameplay/material changes made.
+
+Video: 20.6s, 60fps. At 5.15s broad red environment edge sweep across floor mesh, railing and walls; at 7.7s environment mostly normal while cube/door warm outlines remain. Source is older TheManTest recording, Mat_Outline_library visible in editor tabs. Extracted frames and contact sheet: D:/UnrealWork/ScanReference.
+
+Current material read through live editor: Mat_Outline_library still has spherical-mask edge scan, radius parameter 30000cm and thickness0.5, ScanTime passes Frac, camera-relative origin. BP_Infiltrator ScanEffect defaults: radius3000cm, duration2s, added terrain decal enabled. Thus PP radius and actual detection/decal radius differ tenfold. At progress1 Frac resets PP radius to0 while decal remains at max radius; component disables tick and retains ScanAlpha1. These are confirmed graph/code mismatches, not proof that every perceived difference has one cause. Earlier final rendered screenshot D:/UnrealWork/ScanRed/ScanOn00000.png shows original PP still active alongside extra terrain ring; do not misreport that only ground ring exists.
+
+Proposed correction pending approval: prioritize original environment contour wave, disable extra ground-only ring in reference matching mode; unify visual/detection radius, calibrate thickness/brightness/timing against reference; explicit wave completion fade instead of Frac wrap; preserve latest user requirement that detected-target highlight stays until scan cancelled. Compare same station railing/wall viewpoint and onset/mid/end frames in actual PIE. No need to restore old first-person arms/animation. No external source project change. FEAT-103 remains completed/uncommitted, FEAT-101 package acceptance still pending.

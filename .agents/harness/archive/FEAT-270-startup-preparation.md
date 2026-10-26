@@ -1,0 +1,23 @@
+# Startup preparation
+
+Status: needs_improvement (historical intermittent timeout unresolved)
+
+User approved investigation/fix after actual v0.8 30s pending2 stall was identified; existing loading animation requested for normal waiting. Checkpoint fe2cfbe6. Adding bounded diagnostic logging to identify exact streaming versus PSO blocker. Existing no unrelated asset edits; no packaging requested. Evidence D:/UnrealWork/StartupDiagnosis.
+
+## Investigation and implemented feedback
+
+Native diagnostics identify separate IO/init versus below-full-residency versus PSO resource names, every5seconds after5seconds. Source standalone medium5.205s and second instance10.044s preparation passed. To inspect original cooked resources without repackaging, copied46 delivery files into external CookedProbe, hardlinked immutable pak/utoc/ucas, original release untouched. Current native binary cannot read old unversioned cooked reflected layouts (controlled probe hit serialization assert); stopped it, never shipped it. Extracted historical d3dab38f Source/Config/uproject to LegacySource, copied matching unchanged controller plus diagnostics, compiled DebugGame43.17s. Cooked resource probes then load successfully: normal2.399s, second4.202s, original user low settings3.265s, duplicate3.304s; four further fresh-process starts1.619/1.675/1.648/1.728s. None reproduce original30s stall. Those tests diagnose original asset set, not current full-game release compatibility.
+
+User requested loading animation for ordinary waiting; startup now passes bStartupLogo as SLoadingScreen loading-details flag, retaining same title/zoom/fade and only enabling existing arcs/text on initial standalone startup. Development Editor final build23.06s Success. Actual final standalone5.166s preparation,5.439s WorldReady, fade completes03:10:07UTC. Screenshot startup-spinner-1.png inspected; lower-right arcs/LOADING visible. A transient2-resource wait at job14 clears normally in0.16s (scoped rifle textures), not evidence those were the historical job0 blocker. Native30s fallback unchanged; historical exact blocker remains unconfirmed. PIE verification pending.
+
+## Final verification and handoff
+
+Render-enabled PIE confirms prepared=true, failed=false, pending0 at12.281s including PIE startup. PIE ended; restored TestMap, dirty maps/content empty. Source diff-check clean. Spinner/diagnostic work verified; exact historical timeout remains unconfirmed after targeted repeated probes, so feature is not marked done. User was asked whether observed delay is5-10s versus30s; no answer yet. Current change is source only and original published v0.8 has not been updated. No final commit/push/package/version change; unrelated edits preserved. Next investigation should use a reproducible30s case and capture new resource-level logs; do not randomly shorten timeout or bypass readiness.
+
+## 2026-10-08 additional repeated starts and cache comparison
+
+User requested more reproductions, then asked whether cache causes the delay. Ran29 additional process starts in historical cooked diagnostic sandbox:12 single-instance runs(4 each low/medium/high),6starts across3Lobby double-instance scenarios,3minimize8s/restore scenarios,4fresh-user-directory first/second comparisons,4starts across2SpaceStation-holder/second-Lobby scenarios. All27Lobby starts complete, both Station holders load, no30s timeout or fatal. Single-instance preparation low2.724-2.897s,medium3.922-4.129s,high5.868-6.253s. Lobby double second7.890/14.260/11.613s; minimize/restore3.729/5.340/8.602s. Station holder second16.179/11.554s. Significant runtime load sensitivity is observed, but does not identify original job0/pending2 root cause.
+
+Fresh UserDir pairs(medium, same settings) A3.953->4.802s, B4.072->4.134s. Engine Paths.cpp confirms UserDir isolates ProjectUserDir/Saved. No first-run slowdown pattern in these pairs; application cache corruption is unsupported by this evidence. OS filesystem and vendor driver caches were NOT cleared; no full-machine cold-start claim and cannot exclude those caches. Existing release/project/user caches untouched. External probe settings restored exactly, all spawned test processes closed. Existing editor retained. Evidence Repeated/results.json, CacheStudy/results.json, repeat-summary.json. Production source/assets unchanged during this batch. Historical intermittent timeout remains needs_improvement.
+
+User explicitly deferred further work: "?? ?????". Stop reproduction/cache work; unresolved timeout retained as needs_improvement. Next requested task is a new Tracer-reference Infiltrator blink, separate scope.

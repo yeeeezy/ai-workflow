@@ -1,0 +1,17 @@
+# FEAT213 Dream Blink V2
+
+Status: done
+
+FEAT213 completed2026-09-28. New owner-local BlinkV2 folder contains M/MI_Infiltrator_DreamBlink and BGA_Infiltrator_DreamBlink. BP_Infiltrator now grants V2 on existing Q; original36V1packages unchanged. Rollback: replace DreamBlink class in BP DefaultAbilityClasses with original BGA_Infiltrator_Blink; scan class unchanged.
+
+UGA_InfiltratorDreamBlink derives existing blink, using virtual AdvanceBlink/BeginPresentation hooks. Reuses original activation/commit,PlayerStateASC,collision query,movement ownership and cleanup. Holds origin until85ms, rechecks whole live capsule path, performs exactly one600cm maximum TeleportPhysics landing; moving obstacles shorten/block.45ms radial image pull (2-3frames at60Hz), black/purple multiscale cloud/grain occlusion around teleport, three displaced screen-space scene copies fade over150ms; fixed total235ms. This is screen-space displaced current-scene imagery, not captured historical frames or world geometry deformation. Timing quantizes to game frames; normal60Hz evidence holds0cm through83.3ms and lands600cm at100ms, no intermediate traversal, filter gone by250ms. No persistent tint/exposure changes.
+
+Common presentation minimal mode retains owned accepted audio and existing HUD, skips V1 filter,phase gun/arms,smear and Flash trails; equipment changes also respect minimal mode. V2 owns its PP/MID and destroys both on success/cancel/death/unpossess. Sound may finish its existing1.577s natural tail after success, stops on cancellation. Original weapon/arm materials preserved. Prior FEAT212 six independent cold-white/violet strokes remain3:2:1 inward aligned with no connectors; bottom HUD unchanged. No animation/retargeting, map saves, packaging,version increment or push.
+
+Validation: cold Development Editor Win64 build27.72s Succeeded. Live ability and character BP opened/compiled/saved. Native Blink(V1 transient fixture),BlinkKeyboard(productionV2 Q),BlinkV2 all Success. V2 tests cover no motion during pull/noise,one600cm teleport,235ms completion,no legacyPP/trails,audio,cancel before/after teleport,dynamic obstacle and unpossess cleanup. Final unsavedTestMap review passed520 checks (mostly per-frame position checks) plus originalmaterials,actualaudio,teardown,normal-speed600cm and active scan preservation. Pull/Noise/Arrival/Echo/Restored screenshots inspected. No performance benchmark.
+
+Independent read-only cold asset verification passed exactHLSL,parent/location,two scalar parameters through shader/defaults,600/.235 settings,productiongrant and oldV1 settings,3uniquepackages/noRedirectors. Initial verifier erroneously counted BlueprintGeneratedClass as a fourth package; corrected to unique package names. Cold loading marks unrelated existing BB_CoreMorphBoss dirty in memory; recorded and discarded without saving. Live cleanup is authoritative for editor dirty state. Initial noise looked gridlike; replaced with smooth3octave cloud noise and fine grain,final PIE rerun passed.
+
+Evidence D:/UnrealWork/BlinkV2. Checkpoint42e015a2 preserves completed FEAT212 and priorV1. Final V2 results saved/uncommitted per harness. User explicitly authorized graceful computer shutdown after completion; do not force-discard unrelated unsaved work.
+
+Final cleanup: SpaceStation restored,PIE false,dirty content/maps0,target editor closed. Hidden helper scheduled graceful shutdown in15seconds without force-closing applications.

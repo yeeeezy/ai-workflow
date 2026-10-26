@@ -1,0 +1,5 @@
+# FEAT265 Restore native ground animations
+
+User approved returning to model-native animations, retaining repaired AI without side pacing. Remove FEAT262/264 eye/chest/arm compensations. Native idle/walk/attacks, original mesh/tentacles. No new retargeting or unrelated testing.
+
+Completed: GroundIdleRelaxed and directional GroundWalk/Back/Left/Right restored, idle motion weight1/playrate1. Native Melee1..4 restored with original hit time.22s. Removed GroundEyeLift field/setter/proxy chest correction and two-bone arm solve entirely. No further tentacle changes; original full mesh retained. AI ground approach/near stop and no random side pacing unchanged. Build21.13s succeeded; both BPs live compiled/saved. Actual idle/walk preview at140cm/s recorded/inspected, Native-Preview.mp4. No new retargeting or unrelated regression. Editor16232 on primary TestMap PIE temporary actor/camera, brain paused, player moved aside. No maps saved. Checkpoint00aa80c9; final source/assets/docs uncommitted. Subjective review pending.

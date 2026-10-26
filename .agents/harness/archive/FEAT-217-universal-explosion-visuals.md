@@ -1,0 +1,8 @@
+# FEAT217 Universal explosion visuals
+
+Status: done (closed2026-09-28)
+User authorized all impacts to show explosion and removal of obsolete ground tags. Diagnosis: SpaceStation1854loaded actors, zero ExplosionGround tags; valid environment/enemy Niagara assets. Old ground cue suppresses VFX without tagged ground. Checkpoint6ae4f66b preserves FEAT216.
+
+Implementation: remove ExplosionGroundTag constant and ActorHasTag requirement; choose nearest non-character/non-projectile/non-Chaos upward hit within existing slope/distance bounds. Cue spawns at real blast point/normal when no ground exists. Existing enemy effect selection retained. Removed65obsolete TestMap actor tags via editor and saved external actor packages; entire Content binary scan finds no ExplosionGround references. SpaceStation had none. Build26.53s success; initial regression hit existing map geometry so moved its transient fixture to z10000 and adjusted relative-height assertions. Final Editor build9.08s success. No asset VFX replacement or damage/fuse changes.
+
+Final regression ExplosionChaosGround Success in fresh editor final-editor.log (untagged floor/top selection, slope/distance/Chaos exclusions, no-ground VFX fallback, real collision/fuse/fracture/impulse and floorVFX). SpaceStation actual equipped ExplosionGun GAS shots:2real collision/fuse/detonation sequences,8checks passed; live Niagara components and normal-frame screenshots StationExplosion000000.png/StationExplosion100000.png verify visible explosion. Visual screenshot inspected. Final test fixture altitude correction is test-only. Final build9.08s success, no compiler warnings. Final changes saved/uncommitted. No packaging/version/push, no new assets or retargeting.

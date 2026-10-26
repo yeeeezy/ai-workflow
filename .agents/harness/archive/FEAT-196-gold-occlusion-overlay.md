@@ -1,0 +1,13 @@
+# FEAT-196 Gold occlusion overlay
+
+Status: done; closed2026-09-27
+
+User requests return to retained translucent gold XRay with visible rim and transparent occluded parts. Checkpoint58bc0dce protects original Flame gold and handmade object gold. Restore overlay ownership and add per-pixel scene-depth gating to existing XRay. Preserve other scan assets, exposure0, object highlight, no map writes. Evidence D:/UnrealWork/GoldOcclusion.
+
+Milestone: native overlay ownership restored with shared MID and previous-overlay/distance restoration. Development Editor Win64 cold build succeeded11.22s. Existing XRay adds SceneDepth/PixelDepth visible-rim versus hidden-fill selection (bias2cm, feather3cm), retains custom-depth inner-surface culling and original gold colors. Glow Strength3. BP configured, opened, compiled/saved, exposure0 readback. Python CustomInput initialization corrected before saving; no shader error reported so far. Actual PIE review pending.
+
+## Completion
+
+FEAT196 completed2026-09-27: replaced active Flame enemy postprocess with retained MI_Infiltrator_ScanGoldXRay surface overlay. Visible surfaces keep original material with gold Fresnel rim; occluded parts receive translucent gold fill via per-pixel PixelDepth-SceneDepth smoothstep (Occlusion Bias2cm, Feather3cm), original custom-depth inner-surface culling retained. Gold RGBA unchanged from FEAT189; Glow Strength3, Edge Exponent3.5, Highlight Opacity.8. Native sharedMID overlay ownership saves/restores prior overlay/distance/depth/stencil, excludes guns, handles stop/range/death/hidden/unpossess/destruction; enemy pass no longer added to scan PP. BP configured/opened/compiled/saved with exposure0. Development Editor Win64 cold build11.22s Succeeded. Actual TestMap real GAS32checks passed with visible/partial/full occluders, movement across edge, original handmade gold object and on/off restoration; GoldOcclusion.png shows requested behavior. Existing GoldHighlightLifecycle native test Success. Independent cold17checks and saved graph export passed. Exactly3assets changed (XRay M/MI and BP);45other scan/BP assets SHA256 preserved including Flame backup, handmade highlight, purple floor and original blur. PIE ended, dirtycontent/maps0; editor remains on secondary monitor. No map change, push/package/version change or performance benchmark. Checkpoint58bc0dce preserves prior version; evidence D:/UnrealWork/GoldOcclusion. Final changes saved/uncommitted.
+
+Visual distinction uses opaque scene depth; translucent objects that do not write scene depth are not treated as walls. Original radial blur remains and softens peripheral rims. No subjective user acceptance or performance gain claimed.

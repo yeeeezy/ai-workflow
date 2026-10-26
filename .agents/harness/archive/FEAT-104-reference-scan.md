@@ -1,0 +1,14 @@
+# FEAT-104 Reference scene contour scan
+
+Status: done. Closed2026-09-17. User approved reference-audit proposal. Checkpoint f5b8fe9. Reference and audit: 2026-09-17-scan-video-reference-audit.md.
+
+Implementation: removed runtime terrain decal creation and component fields. Component publishes MaxScanRadius to new MPC ScanRadius; material reads it instead of independent30000cm scalar. Removed Frac, progress remains1 on completion; scene alpha smoothsteps to0 over configurable0.65s. Target highlight recipients retained until explicit retract/restart/EndPlay. Existing outline/flow color, thickness0.5 and2s easing retained as source-reference baseline.
+Build: Development Editor Win64 Succeeded, build.log. MPC/material recompiled/saved; BP_Infiltrator compiled/saved unchanged on disk. First rendered real-GA PIE pass: seven samples, alpha~0.48 at2.33s and0 at3s, highlight retained13.67s; cancellation/restart/component destruction pass; no terrain decal. Evidence D:/UnrealWork/ScanReference/pie.json. Cold platform-view verification in progress. Existing startup UMG compiler ensure and auto-dirty boss blackboard observed; no unrelated asset saves.
+
+Final: cold platform PIE passed (13.61s retention), plus closer grating/railing visual inspection. Grating test shortened hold to3.5s (its inherited13s label is stale; use ground/platform JSON for actual13s evidence). cold.json confirms direct MPC ScanRadius/ScanTime inputs, no Frac, default radius3000cm and fade0.65s. SpaceStation/TestMap/LobbyMap unchanged on disk; temporary pawn/cube relocations only in PIE. No shader compile errors in changed scan material; pre-existing M_UE4Man_Body warning persists. Editor remains open on primary in SpaceStation, PIE stopped; loaded boss blackboard auto-dirty left unsaved. Old terrain material asset retained for compatibility but no component reference/runtime use. No final commit/push or repackaging.
+
+## User correction: toggle-only hold (2026-09-17)
+
+User explicitly rejected automatic fade: retain entire scan until second activation. Checkpoint19d1067 preserves preceding reference restoration. Removed WaveFadeDuration/fade state; expansion ends at ScanTime1/ScanAlpha1, Tick stays active solely to keep camera-relative origin aligned with fixed world origin. Explicit retract/restart/EndPlay still clear visual and targets immediately. Editor build hold-build-final.log succeeded; runtime hold/moving-camera/toggle verification underway. This supersedes automatic-fade design above. No material/map edits in this correction.
+
+Correction verified: Hold/pie.json ok=true; at13.50s progress1/alpha1/target lit, moving camera150cm updates MPC origin by-150cm, second real GA toggle immediately clears both, restart and component destruction pass. Editor remains open in SpaceStation, PIE stopped. No asset/map edits; correction uncommitted/unpushed.
